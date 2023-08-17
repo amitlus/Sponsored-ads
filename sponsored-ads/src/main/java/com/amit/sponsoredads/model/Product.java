@@ -23,6 +23,16 @@ public class Product {
 
     @ManyToMany(mappedBy = "products")
     private List<Campaign> campaigns = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productSerialNumber=" + productSerialNumber +
+                ", title='" + title + '\'' +
+                ", category='" + category + '\'' +
+                ", price=" + price +
+                '}';
+    }
 }
 
 

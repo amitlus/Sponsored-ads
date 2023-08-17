@@ -20,7 +20,6 @@ public class Campaign {
     private Long id;
     private String name;
     private Date startDate;
-
     @ManyToMany
     @JoinTable(
             name = "campaign_product",
@@ -30,5 +29,16 @@ public class Campaign {
     private List<Product> products = new ArrayList<>();
 
     private double bid;
+
+    @Override
+    public String toString() {
+        return "Campaign{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", startDate=" + startDate +
+                ", products=" + products +
+                ", bid=" + bid +
+                '}';
+    }
 }
 
