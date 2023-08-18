@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 
 public class CampaignDto {
-    private Long id;
     private String name;
     private Date startDate;
     private List<Integer> productIds;

@@ -64,9 +64,16 @@ public class SponsoredAdsApplication implements CommandLineRunner {
         campaign3.setBid(100.0);
         campaign3.getProducts().add(product3);
 
+        Campaign campaign4 = new Campaign();
+        campaign3.setName("Campaign 4");
+        campaign3.setStartDate(new Date(System.currentTimeMillis() - 11 * 24 * 60 * 60 * 1000));
+        campaign3.setBid(200.0);
+        campaign3.getProducts().add(product1);
+
         campaignRepository.save(campaign1);
         campaignRepository.save(campaign2);
         campaignRepository.save(campaign3);
+        campaignRepository.save(campaign4);
 
         // Associate the products with campaigns
         product1.getCampaigns().add(campaign1);

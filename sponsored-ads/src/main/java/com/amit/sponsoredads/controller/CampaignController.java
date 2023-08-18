@@ -1,7 +1,6 @@
 package com.amit.sponsoredads.controller;
 
 import com.amit.sponsoredads.dto.campaign.CampaignDto;
-import com.amit.sponsoredads.repository.CampaignRepository;
 import com.amit.sponsoredads.service.CampaignService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

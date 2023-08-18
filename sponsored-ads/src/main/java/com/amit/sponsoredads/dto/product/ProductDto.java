@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductDto {
-    private Integer productSerialNumber;
     private String title;
     private String category;
     private double price;

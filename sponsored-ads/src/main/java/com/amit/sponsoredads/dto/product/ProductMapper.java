@@ -1,19 +1,20 @@
 package com.amit.sponsoredads.dto.product;
 
-import com.amit.sponsoredads.dto.campaign.CampaignDto;
-import com.amit.sponsoredads.model.Campaign;
 import com.amit.sponsoredads.model.Product;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring", uses = {ProductMapper.class})
 public interface ProductMapper {
-    ProductMapper INSTANCE = Mappers.getMapper( ProductMapper.class );
+    ProductMapper INSTANCE = Mappers.getMapper(ProductMapper.class);
 
-//    @Mapping(source = "numberOfSeats", target = "seatCount")
     ProductDto productToProductDto(Product product);
+
     @InheritInverseConfiguration
     Product productDtoToProduct(ProductDto productDto);
+
+    default Integer mapProductToInteger(Product product) {
+        return product.getProductSerialNumber();
+    }
 }

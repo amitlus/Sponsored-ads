@@ -1,18 +1,28 @@
 package com.amit.sponsoredads.dto.campaign;
 
+import com.amit.sponsoredads.dto.product.ProductMapper;
 import com.amit.sponsoredads.model.Campaign;
-import org.mapstruct.InheritInverseConfiguration;
-import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
+import com.amit.sponsoredads.model.Product;
+import com.amit.sponsoredads.service.AdService;
+import org.mapstruct.*;
 
-@Mapper
+import java.util.List;
+
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING, injectionStrategy = InjectionStrategy.CONSTRUCTOR, uses = {AdService.class, ProductMapper.class})
 public interface CampaignMapper {
-    CampaignMapper INSTANCE = Mappers.getMapper(CampaignMapper.class);
 
-    //    @Mapping(source = "numberOfSeats", target = "seatCount")
+    @Mapping(source = "products", target = "productIds")
     CampaignDto campaignToCampaignDto(Campaign campaign);
 
+    @Mapping(source = "productIds", target = "products")
     @InheritInverseConfiguration
     Campaign campaignDtoToCampaign(CampaignDto campaignDto);
 
+
+    List<Product> mapProductIdsToProducts(List<Integer> productIds);
+
+
+    List<Integer> mapProductsToProductIds(List<Product> products);
+
 }
+
