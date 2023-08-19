@@ -5,6 +5,8 @@ import com.amit.sponsoredads.dto.campaign.CampaignMapper;
 import com.amit.sponsoredads.model.Campaign;
 import com.amit.sponsoredads.repository.CampaignRepository;
 import lombok.Data;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -13,6 +15,7 @@ import java.util.List;
 @Data
 @Service
 public class CampaignService {
+    private static final Logger logger = LoggerFactory.getLogger(CampaignService.class);
     private CampaignRepository campaignRepository;
     private CampaignMapper campaignMapper;
     private AdService adService;
@@ -24,6 +27,7 @@ public class CampaignService {
     }
 
     public CampaignDto createCampaign(CampaignDto campaignDto) {
+        logger.info("Creating campaign: {}", campaignDto.getName());
         Campaign createdCampaign = campaignRepository.save(campaignMapper.campaignDtoToCampaign(campaignDto));
         // Return the converted CampaignDto after saving
         return campaignMapper.campaignToCampaignDto(createdCampaign);
@@ -34,10 +38,7 @@ public class CampaignService {
         List<Campaign> activeCampaigns = campaignRepository.findCampaignsByStartDateGreaterThanAndProductsCategory(tenDaysAgo, category);
 
         if (!activeCampaigns.isEmpty()) {
-            Campaign campaign = findCampaignWithMaxBid(activeCampaigns);
-            if (campaign != null) {
-                return campaign;
-            }
+            return findCampaignWithMaxBid(activeCampaigns);
         }
         return null;
 
@@ -53,7 +54,6 @@ public class CampaignService {
                 campaignWithMaxBid = campaign;
             }
         }
-
         return campaignWithMaxBid;
     }
 

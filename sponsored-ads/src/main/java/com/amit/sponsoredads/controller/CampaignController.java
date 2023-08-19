@@ -2,6 +2,7 @@ package com.amit.sponsoredads.controller;
 
 import com.amit.sponsoredads.dto.campaign.CampaignDto;
 import com.amit.sponsoredads.service.CampaignService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,14 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/campaigns")
 @RestController
 public class CampaignController {
-    private CampaignService campaignService;
+    private final CampaignService campaignService;
 
     public CampaignController(CampaignService campaignService) {
         this.campaignService = campaignService;
     }
 
     @PostMapping
-    public ResponseEntity<CampaignDto> createCampaign(@RequestBody CampaignDto campaignDto) {
+    public ResponseEntity<CampaignDto> createCampaign(@Valid @RequestBody CampaignDto campaignDto) {
         CampaignDto resBody = campaignService.createCampaign(campaignDto);
         return new ResponseEntity<>(resBody, HttpStatus.CREATED);
     }

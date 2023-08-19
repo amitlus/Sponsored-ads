@@ -10,7 +10,6 @@ import java.util.List;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, injectionStrategy = InjectionStrategy.CONSTRUCTOR, uses = {AdService.class, ProductMapper.class})
 public interface CampaignMapper {
-
     @Mapping(source = "products", target = "productIds")
     CampaignDto campaignToCampaignDto(Campaign campaign);
 
@@ -18,9 +17,7 @@ public interface CampaignMapper {
     @InheritInverseConfiguration
     Campaign campaignDtoToCampaign(CampaignDto campaignDto);
 
-
     List<Product> mapProductIdsToProducts(List<Integer> productIds);
-
 
     List<Integer> mapProductsToProductIds(List<Product> products);
 
