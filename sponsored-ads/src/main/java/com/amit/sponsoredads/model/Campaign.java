@@ -27,7 +27,6 @@ public class Campaign {
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
     private List<Product> products = new ArrayList<>();
-
     private double bid;
 
     @Override

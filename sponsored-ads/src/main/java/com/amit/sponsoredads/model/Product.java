@@ -23,7 +23,6 @@ public class Product {
     private String title;
     private String category;
     private double price;
-
     @ManyToMany(mappedBy = "products")
     private List<Campaign> campaigns = new ArrayList<>();
 

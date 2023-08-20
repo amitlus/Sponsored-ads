@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface CampaignRepository extends JpaRepository<Campaign, Long> {
     List<Campaign> findCampaignsByStartDateGreaterThanAndProductsCategory(LocalDateTime localDateTime, String category);
+
     Campaign findCampaignByName(String campaignName);
 }
 

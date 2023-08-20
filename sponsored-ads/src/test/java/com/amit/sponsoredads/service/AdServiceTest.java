@@ -18,10 +18,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@RunWith(SpringRunner.class) // Add this annotation
+@RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-//@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class AdServiceTest extends BaseTest {
     @Autowired
     private CampaignService campaignService;
@@ -36,7 +35,6 @@ class AdServiceTest extends BaseTest {
         campaign1 = new CampaignDto("Test Campaign 1", LocalDateTime.now(ZoneOffset.UTC), List.of(4, 5), 40.0);
         campaign2 = new CampaignDto("Test Campaign 2", LocalDateTime.now(ZoneOffset.UTC), List.of(4, 5), 50.0);
     }
-
 
     @Test
     void findProductByCategoryAndCampaign() {

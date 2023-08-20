@@ -17,6 +17,7 @@ public class AdService {
     public AdService(ProductRepository productRepository) {
         this.productRepository = productRepository;
     }
+
     @Transactional
     public ProductDto findProductByCategoryAndCampaign(String category, Campaign campaign) {
         Product product = productRepository.findFirstByCategoryAndCampaigns(category, campaign);
