@@ -9,6 +9,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 @SpringBootApplication
 public class SponsoredAdsApplication implements CommandLineRunner {
@@ -27,20 +30,36 @@ public class SponsoredAdsApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
+        //On initialization, you may generate a bulk of products, each with random category (select one from few possibilities)...
+        List<String> categories = new ArrayList<>();
+        categories.add("Sports");
+        categories.add("Music");
+        categories.add("Lifestyle");
+
+        Random random = new Random();
+        String randomCategory;
+        int randomIndex;
+
         Product product1 = new Product();
         product1.setTitle("Product 1");
-        product1.setCategory("Category1");
+        randomIndex = random.nextInt(categories.size());
+        randomCategory = categories.get(randomIndex);
+        product1.setCategory(randomCategory);
         product1.setPrice(100.0);
 
         Product product2 = new Product();
         product2.setTitle("Product 2");
-        product2.setCategory("Category2");
+        randomIndex = random.nextInt(categories.size());
+        randomCategory = categories.get(randomIndex);
+        product2.setCategory(randomCategory);
         product2.setPrice(200.0);
 
         Product product3 = new Product();
-        product1.setTitle("Product 3");
-        product1.setCategory("Category1");
-        product1.setPrice(400.0);
+        product3.setTitle("Product 3");
+        randomIndex = random.nextInt(categories.size());
+        randomCategory = categories.get(randomIndex);
+        product3.setCategory(randomCategory);
+        product3.setPrice(400.0);
 
         productRepository.save(product1);
         productRepository.save(product2);
