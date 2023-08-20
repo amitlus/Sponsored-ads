@@ -17,7 +17,7 @@ public class AdService {
         this.productRepository = productRepository;
     }
 
-    public ProductDto getProductByCategoryAndCampaign(String category, Campaign campaign) {
+    public ProductDto findProductByCategoryAndCampaign(String category, Campaign campaign) {
         Product product = productRepository.findProductByCategoryAndCampaigns(category, campaign);
         return ProductMapper.INSTANCE.productToProductDto(product);
     }

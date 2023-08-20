@@ -8,7 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @SpringBootApplication
 public class SponsoredAdsApplication implements CommandLineRunner {
@@ -26,7 +26,7 @@ public class SponsoredAdsApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         Product product1 = new Product();
         product1.setTitle("Product 1");
         product1.setCategory("Category1");
@@ -48,25 +48,25 @@ public class SponsoredAdsApplication implements CommandLineRunner {
 
         Campaign campaign1 = new Campaign();
         campaign1.setName("Campaign 1");
-        campaign1.setStartDate(new Date());
+        campaign1.setStartDate(LocalDateTime.now());
         campaign1.setBid(50.0);
         campaign1.getProducts().add(product1);
 
         Campaign campaign2 = new Campaign();
         campaign2.setName("Campaign 2");
-        campaign2.setStartDate(new Date());
+        campaign2.setStartDate(LocalDateTime.now());
         campaign2.setBid(75.0);
         campaign2.getProducts().add(product2);
 
         Campaign campaign3 = new Campaign();
         campaign3.setName("Campaign 3");
-        campaign3.setStartDate(new Date());
+        campaign3.setStartDate(LocalDateTime.now());
         campaign3.setBid(100.0);
         campaign3.getProducts().add(product3);
 
         Campaign campaign4 = new Campaign();
         campaign3.setName("Campaign 4");
-        campaign3.setStartDate(new Date(System.currentTimeMillis() - 11 * 24 * 60 * 60 * 1000));
+        campaign3.setStartDate(LocalDateTime.now().minusDays(11));
         campaign3.setBid(200.0);
         campaign3.getProducts().add(product1);
 

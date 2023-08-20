@@ -4,31 +4,31 @@ import com.amit.sponsoredads.dto.campaign.CampaignDto;
 import com.amit.sponsoredads.dto.campaign.CampaignMapper;
 import com.amit.sponsoredads.model.Campaign;
 import com.amit.sponsoredads.repository.CampaignRepository;
-import lombok.Data;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.amit.sponsoredads.repository.ProductRepository;
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
 
-@Data
+@Slf4j
+@AllArgsConstructor
 @Service
 public class CampaignService {
-    private static final Logger logger = LoggerFactory.getLogger(CampaignService.class);
     private CampaignRepository campaignRepository;
+    private ProductRepository productRepository;
     private CampaignMapper campaignMapper;
-    private AdService adService;
 
-    public CampaignService(CampaignRepository campaignRepository, CampaignMapper campaignMapper, AdService adService) {
-        this.campaignMapper = campaignMapper;
-        this.campaignRepository = campaignRepository;
-        this.adService = adService;
-    }
-
+    @Transactional
     public CampaignDto createCampaign(CampaignDto campaignDto) {
-        logger.info("Creating campaign: {}", campaignDto.getName());
+        log.info("Creating campaign: {}", campaignDto.getName());
         Campaign createdCampaign = campaignRepository.save(campaignMapper.campaignDtoToCampaign(campaignDto));
+        createdCampaign.getProducts().forEach((product -> {
+            product.getCampaigns().add(createdCampaign);
+            productRepository.save(product);
+        }));
         // Return the converted CampaignDto after saving
         return campaignMapper.campaignToCampaignDto(createdCampaign);
     }
@@ -41,7 +41,6 @@ public class CampaignService {
             return findCampaignWithMaxBid(activeCampaigns);
         }
         return null;
-
     }
 
     private Campaign findCampaignWithMaxBid(List<Campaign> campaigns) {

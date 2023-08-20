@@ -27,12 +27,15 @@ dependencies {
 	implementation("mysql:mysql-connector-java:8.0.33")
 	implementation ("org.mapstruct:mapstruct:1.5.5.Final")
 	implementation("org.springframework.boot:spring-boot-starter-validation")
-	compileOnly("org.projectlombok:lombok")
+    testImplementation("junit:junit:4.13.1")
+    compileOnly("org.projectlombok:lombok")
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	annotationProcessor("org.projectlombok:lombok")
 	annotationProcessor("org.mapstruct:mapstruct-processor:1.5.5.Final")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testAnnotationProcessor ("org.mapstruct:mapstruct-processor:1.5.5.Final")
+	testAnnotationProcessor("org.projectlombok:lombok")
+	testCompileOnly ("org.projectlombok:lombok")
 }
 
 tasks.withType<Test> {
