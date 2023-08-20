@@ -10,7 +10,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.List;
 
 @Slf4j
@@ -34,7 +35,7 @@ public class CampaignService {
     }
 
     public Campaign getActiveMaxBidCampaignByCategory(String category) {
-        Date tenDaysAgo = new Date(System.currentTimeMillis() - 10 * 24 * 60 * 60 * 1000);
+        LocalDateTime tenDaysAgo = LocalDateTime.now(ZoneOffset.UTC).minusDays(10);
         List<Campaign> activeCampaigns = campaignRepository.findCampaignsByStartDateGreaterThanAndProductsCategory(tenDaysAgo, category);
 
         if (!activeCampaigns.isEmpty()) {
